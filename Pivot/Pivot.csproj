@@ -208,6 +208,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\ChartDashlet\ChartPartial.cshtml" />
+    <Content Include="Views\ChartDashlet\CustomizationPartial.cshtml" />
+    <Content Include="Views\ChartDashlet\Edit.cshtml" />
+    <Content Include="Views\ChartDashlet\PivotCustomCallbacks\SaveLayout.cshtml" />
+    <Content Include="Views\ChartDashlet\PivotPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -219,6 +224,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ChartDashletController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

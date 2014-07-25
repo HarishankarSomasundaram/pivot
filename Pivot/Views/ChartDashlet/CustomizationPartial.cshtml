@@ -1,0 +1,33 @@
+﻿
+@model System.Collections.IEnumerable
+@{
+    PivotGridSettings pivotGridSettings = ChartEdit.Controllers.DataHelper.ChartDashletPivotGridSettings;
+
+}
+
+@Html.DevExpress().RoundPanel(
+    settings =>
+    {
+        settings.Name = "roundPanel";
+        settings.HeaderText = "Complex Pivot Table";
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        settings.SetContent(() =>
+        {
+            ViewContext.Writer.Write("<div><div style=\"float:left; padding-right:10px;\">");
+            Html.DevExpress().PivotCustomizationExtension(ChartEdit.Controllers.DataHelper.ChartDashletPivotGridSettings).Render();
+            //ViewContext.Writer.Write("</div><div>");
+
+            //Html.RenderPartial("PivotPartial", Model);
+            ViewContext.Writer.Write("</div><div id='highchartArea'>");
+            Html.RenderPartial("ChartPartial", ((DotNet.Highcharts.Highcharts)Session["Chart"]) ??
+            ChartEdit.Controllers.DataHelper.GetHighCharts((DevExpress.Web.ASPxPivotGrid.PivotChartDataSource)PivotGridExtension.GetDataObject(pivotGridSettings, Model)));
+
+            ViewContext.Writer.Write("</div></div>");
+        });
+    }).GetHtml()
+
+
+
+
+
+

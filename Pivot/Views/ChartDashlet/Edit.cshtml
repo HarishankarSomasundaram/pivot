@@ -1,0 +1,36 @@
+﻿@model System.Collections.IEnumerable
+
+@{
+  //  PivotGridSettings pivotGridSettings = ChartEdit.Controllers.DataHelper.ChartDashletPivotGridSettings;
+
+}
+<script type="text/javascript">
+
+    var isNeedUpdateChart = false;
+
+    function OnBeforePivotGridCallback(s, e) {
+        isNeedUpdateChart = true;
+    }
+    function UpdateChart(s, e) {
+        if (isNeedUpdateChart) {
+            var p = {};
+            pivotGrid.FillStateObject( p );
+            $.get("/ChartDashlet/ChartPartial", p, function (data) {
+                $("#highchartArea").html(data);
+            });
+            $("#highchartArea").load("/ChartDashlet/ChartPartial", {p:p});
+
+            isNeedUpdateChart = false;
+        }
+    }
+   
+
+</script>
+
+
+
+
+@Html.Partial("CustomizationPartial", Model)
+
+@Html.Partial("PivotPartial",Model)
+
