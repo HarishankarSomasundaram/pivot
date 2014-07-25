@@ -1,0 +1,5 @@
+@Html.DevExpress().PivotGrid(settings => {
+    settings.Name = "PivotGrid3";
+    settings.CallbackRouteValues = new { Controller = "Home", Action = "PivotGrid3Partial" };
+
+	}).Bind(Model).GetHtml()
