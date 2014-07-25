@@ -75,6 +75,9 @@
     <Reference Include="DevExpress.XtraReports.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraReports.v14.1.Web, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraScheduler.v14.1.Core, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DotNet.Highcharts">
+      <HintPath>..\..\..\..\..\Hari\Highcharts\DotNet.Highcharts.Samples\bin\DotNet.Highcharts.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -91,6 +94,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -178,43 +182,32 @@
     <Content Include="Scripts\knockout-3.0.0.debug.js" />
     <Content Include="Scripts\knockout-3.0.0.js" />
     <Content Include="packages.config" />
-    <EntityDeploy Include="Models\PivotModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PivotModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\PivotModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PivotModel.edmx</DependentUpon>
-      <LastGenOutput>PivotModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\PivotModel.edmx.diagram">
-      <DependentUpon>PivotModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\PivotModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PivotModel.edmx</DependentUpon>
-      <LastGenOutput>PivotModel.cs</LastGenOutput>
+    <Content Include="Models\Northwind.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Northwind.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+    <Content Include="Views\Home\ChartPartial.cshtml" />
+    <Content Include="Views\Home\CustomizationPartial.cshtml" />
+    <Content Include="Views\Home\DummyChart.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\Home\PivotPartial.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EmailAddress.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\MultilineText.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\EmailAddress.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Web.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\_PivotGrid2Partial.cshtml" />
-    <Content Include="Views\Home\Demo.cshtml" />
-    <Content Include="Views\Home\_PivotGrid3Partial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -230,30 +223,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Invoice.cs">
-      <DependentUpon>PivotModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PivotModel.Context.cs">
+    <Compile Include="Models\Northwind.cs" />
+    <Compile Include="Models\Northwind.designer.cs">
+      <DependentUpon>Northwind.dbml</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PivotModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PivotModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PivotModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PivotModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PivotModel.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Models\NorthwindDataContextExt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <None Include="Models\Northwind.dbml.layout">
+      <DependentUpon>Northwind.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

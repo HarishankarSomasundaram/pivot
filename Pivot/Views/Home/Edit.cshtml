@@ -1,0 +1,43 @@
+﻿@model System.Collections.IEnumerable
+
+@{
+    PivotGridSettings pivotGridSettings = Pivot.Controllers.DataHelper.ChartDashletPivotGridSettings;
+
+}
+<script type="text/javascript">
+
+    var isNeedUpdateChart = false;
+
+    function OnBeforePivotGridCallback(s, e) {
+        isNeedUpdateChart = true;
+    }
+    function UpdateChart(s, e) {
+        if (isNeedUpdateChart) {
+            webChart.PerformCallback();
+            isNeedUpdateChart = false;
+        }
+    }
+    function OnBeginChartCallback(s, e) {
+        pivotGrid.FillStateObject(e.customArgs);
+    }
+
+    function OnEndChartCallback(s, e)
+    {
+        $("#highchartArea").load("/Home/ChartPartial");
+
+    }
+
+</script>
+
+
+
+
+@Html.Partial("CustomizationPartial", Model)
+@*<div id='highchartArea'>
+        @Html.Partial("ChartPartial", ((DotNet.Highcharts.Highcharts) Session["Chart"])??
+ChartEdit.Controllers.DataHelper.GetHighCharts((DevExpress.Web.ASPxPivotGrid.PivotChartDataSource)PivotGridExtension.GetDataObject(pivotGridSettings, Model)))
+</div>*@
+
+@Html.Partial("PivotPartial",Model)
+
+@Html.Partial("DummyChart", PivotGridExtension.GetDataObject(pivotGridSettings, Model))
