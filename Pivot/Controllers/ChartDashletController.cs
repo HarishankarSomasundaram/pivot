@@ -35,12 +35,17 @@ namespace ChartEdit.Controllers
 
         public ActionResult ChartPartial(MVCxPivotGrid pg, PivotGridSettings pgs)
         {
-            
-            PivotGridSettings pivotGridSettings = ChartEdit.Controllers.DataHelper.ChartDashletPivotGridSettings;
-            DotNet.Highcharts.Highcharts chart = ChartEdit.Controllers.DataHelper.GetHighCharts((DevExpress.Web.ASPxPivotGrid.PivotChartDataSource)PivotGridExtension.GetDataObject(pivotGridSettings,
-                NorthwindDataProvider.GetSalesPerson()));
+            if (pgs.Name != null)
+            {
+                PivotGridSettings pivotGridSettings = ChartEdit.Controllers.DataHelper.ChartDashletPivotGridSettings;
+                DotNet.Highcharts.Highcharts chart = ChartEdit.Controllers.DataHelper.GetHighCharts((DevExpress.Web.ASPxPivotGrid.PivotChartDataSource)PivotGridExtension.GetDataObject(pgs,
+                   NorthwindDataProvider.GetSalesPerson()));
 
-            return PartialView(chart); 
+
+                return PartialView(chart);
+            }
+            else
+                return PartialView(null);
         }
     }
 
